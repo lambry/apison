@@ -1,0 +1,91 @@
+/**
+ * Apsion styles
+ */
+
+ $white: #fff;
+ $silver: #f9f9f9;
+ $red: #e40404;
+ $green: #01c501;
+
+.apison {
+    .tablenav {
+        height: 0;
+    }
+    &-error {
+        color: $red;
+    }
+
+    &-success {
+        color: $green;
+    }
+    &-badge {
+        font-size: 0.6rem;
+        margin-left: 0.25rem;
+        padding: 0.05rem 0.2rem;
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 3px;
+    }
+    &-noitems {
+        text-align: center;
+    }
+
+    // Columns
+    .column-slug,
+    .column-cache {
+        width: 15%;
+    }
+    .column-active,
+    .column-status {
+        width: 10%;
+    }
+    @media (min-width: 783px) {
+        .column-active .dashicons {
+            padding-left: 0.575rem;
+        }
+        .column-status .dashicons {
+            padding-left: 0.75rem;
+        }
+    }
+
+    // Edit form
+    &-form {
+        sup {
+            color: $red;
+            padding-left: 0.25rem;
+        }
+        form {
+            padding-bottom: 0.5rem;
+            &::before {
+                content: '';
+                height: 1rem;
+                width: 2rem;
+                position: absolute;
+                left: calc(50% - 1rem);
+                clip-path: polygon(100% 0, 0 0, 50% 75%);
+                background-color: $silver;
+            }
+        }
+    }
+    tr:nth-child(odd):not(:first-child) form::before {
+        background-color: $white;
+    }
+    &-input {
+        width: 100%;
+    }
+    &-delete {
+        color: $red;
+        line-height: 1.6;
+        margin: 3px 10px 0;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+    }
+}
+
+// Overrides
+#apison .apison-form {
+    .inline-edit-col-left,
+    .inline-edit-col-right {
+        margin-top: 20px;
+    }
+}
