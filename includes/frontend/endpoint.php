@@ -57,7 +57,7 @@ class Endpoint
 
             $query = $this->setQuery($param, $value);
 
-            $api->where($query['key'], $query['comparator'], $query['value']);
+            $api->where($query->key, $query->comparator, $query->value);
         }
 
         if (isset($params['with'])) {
@@ -74,21 +74,39 @@ class Endpoint
      * @access private
      * @param string $param
      * @param string $value
-     * @return array $query
+     * @return object $query
      */
-    private function setQuery(string $param, string $value) : array
+    private function setQuery(string $param, string $value) : \stdClass
     {
-        $query = [];
+        if (! strpos($param, '_')) $param = "{$param}_is";
 
-        if (! strpos($param, '_')) {
-            $param = "{$param}_is";
+        [0 => $key, 1 => $comparator] = explode('_', $param);
+
+        $value = $this->castValues($value, $comparator);
+
+        return (object) [
+            'key' => $key,
+            'comparator' => $comparator,
+            'value' => $value
+        ];
+    }
+
+    /**
+     * Cast supplied string values to boolean or int
+     *
+     * @access private
+     * @param string $value
+     * @return mixed $value
+     */
+    private function castValues(string $value, string $comparator)
+    {
+        if ($comparator === 'is' || $comparator === 'not') {
+            return array_map(function ($val) {
+                return ($val === 'true' || $val === 'false') ? filter_var($val, FILTER_VALIDATE_BOOLEAN) : $val;
+            }, explode(',', $value));
         }
 
-        [0 => $query['key'], 1 => $query['comparator']] = explode ('_', $param);
-
-        $query['value'] = ($query['comparator'] === 'is' || $query['comparator'] === 'not') ? explode(',', $value) : (int) $value;
-
-        return $query;
+        return (int) $value;
     }
 
 }

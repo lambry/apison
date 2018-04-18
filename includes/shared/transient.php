@@ -147,14 +147,14 @@ class Transient
      * Update the endpoints status
      *
      * @access private
-     * @param int $status
+     * @param mixed $status
      * @return bool $success
      */
-    private function updateStatus(int $status) : bool
+    private function updateStatus($status) : bool
     {
         $updated = array_map(function ($endpoint) use ($status) {
             if ($endpoint->slug === $this->slug) {
-                $endpoint->status = $status === 200 ? 'success' : 'error';
+                $endpoint->status = ($status === 200) ? 'success' : 'error';
             }
             return $endpoint;
         }, $this->endpoints);

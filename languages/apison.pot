@@ -1,0 +1,208 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apison 0.1.0\n"
+"POT-Creation-Date: 2018-04-18 11:11+0100\n"
+"PO-Revision-Date: 2015-03-10 21:05+1000\n"
+"Last-Translator: David Featherston <david@lambry.com>\n"
+"Language-Team: \n"
+"Language: en_AU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.5\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: apison.php:84
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/defaults.php:24
+msgid "15 mins"
+msgstr ""
+
+#: includes/admin/defaults.php:25
+msgid "30 mins"
+msgstr ""
+
+#: includes/admin/defaults.php:26
+msgid "1 hr"
+msgstr ""
+
+#: includes/admin/defaults.php:27
+msgid "3 hrs"
+msgstr ""
+
+#: includes/admin/defaults.php:28
+msgid "6 hrs"
+msgstr ""
+
+#: includes/admin/defaults.php:29
+msgid "12 hrs"
+msgstr ""
+
+#: includes/admin/defaults.php:30
+msgid "1 day"
+msgstr ""
+
+#: includes/admin/settings.php:64 includes/admin/views/header.php:10
+msgid "Apison APIs"
+msgstr ""
+
+#: includes/admin/settings.php:64
+msgid "Apison"
+msgstr ""
+
+#: includes/admin/settings.php:105
+msgid "Form fields"
+msgstr ""
+
+#: includes/admin/settings.php:156
+msgid "Invalid request"
+msgstr ""
+
+#: includes/admin/table.php:39
+msgid ""
+"You haven't added any api endpoints, click the Add New button above to get "
+"started."
+msgstr ""
+
+#: includes/admin/table.php:51 includes/admin/views/form.php:17
+msgid "Title"
+msgstr ""
+
+#: includes/admin/table.php:52 includes/admin/views/form.php:24
+msgid "Slug"
+msgstr ""
+
+#: includes/admin/table.php:53 includes/admin/views/form.php:49
+msgid "Cache"
+msgstr ""
+
+#: includes/admin/table.php:54 includes/admin/views/form.php:60
+msgid "Active"
+msgstr ""
+
+#: includes/admin/table.php:55
+msgid "Status"
+msgstr ""
+
+#: includes/admin/table.php:71
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/validation.php:24
+msgid "This doesn't seem right."
+msgstr ""
+
+#: includes/admin/validation.php:28
+msgid "Please ensure all required fields are populated correctly."
+msgstr ""
+
+#: includes/admin/validation.php:32
+msgid "Please ensure the slug is unique."
+msgstr ""
+
+#: includes/admin/views/form.php:31
+msgid "Url"
+msgstr ""
+
+#: includes/admin/views/form.php:42
+msgid "Path"
+msgstr ""
+
+#: includes/admin/views/form.php:71
+msgid "Cancel"
+msgstr ""
+
+#: includes/admin/views/form.php:75
+msgid "Confirm Delete?"
+msgstr ""
+
+#: includes/admin/views/form.php:78
+msgid "Save"
+msgstr ""
+
+#: includes/admin/views/form.php:83
+msgid "Sorry an error has occured, please try again."
+msgstr ""
+
+#: includes/admin/views/header.php:11
+msgid "Add New"
+msgstr ""
+
+#: includes/admin/views/help.php:3
+msgid "Title:"
+msgstr ""
+
+#: includes/admin/views/help.php:4
+msgid "A memorable name for the API feed, used for visual reference only."
+msgstr ""
+
+#: includes/admin/views/help.php:7
+msgid " Slug:"
+msgstr ""
+
+#: includes/admin/views/help.php:8
+msgid ""
+"A short identifier for the API feed, this will be used to access the cached "
+"API data. "
+msgstr ""
+
+#: includes/admin/views/help.php:11
+msgid " URL:"
+msgstr ""
+
+#: includes/admin/views/help.php:12
+msgid ""
+"The full URL to access the desired API data, this will include an API token "
+"if necessary."
+msgstr ""
+
+#: includes/admin/views/help.php:15
+msgid "Path:"
+msgstr ""
+
+#: includes/admin/views/help.php:16
+msgid ""
+"If the data you wish to access is not at the top level of the API response, "
+"you can set a path to point to the data within the API response that you "
+"actually wish to use. For example, you may want to loop over and display "
+"items that are beneath the \"data\" key of the response, if that is that "
+"case add \"data\" to the path field, if you wish to use \"products\" that "
+"are returned beneath said \"data\" add \"data.products\"."
+msgstr ""
+
+#: includes/admin/views/help.php:19
+msgid "Cache:"
+msgstr ""
+
+#: includes/admin/views/help.php:20
+msgid "The duration of time to cache data before refetching from the API."
+msgstr ""
+
+#: includes/admin/views/help.php:23
+msgid "Active:"
+msgstr ""
+
+#: includes/admin/views/help.php:24
+msgid "Whether or not the current API endpoint is active."
+msgstr ""
+
+#: includes/admin/views/help.php:27
+msgid "Save:"
+msgstr ""
+
+#: includes/admin/views/help.php:28
+msgid ""
+"Clicking the save button will save the new/updated endpoint and clear any "
+"currently cached data for that endpoint."
+msgstr ""
+
+#: includes/shared/transient.php:89
+msgid "Empty"
+msgstr ""
