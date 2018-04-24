@@ -121,12 +121,12 @@
                 }
             })
 
-            request.done(({ status, data, message }) => {
+            request.done(({ status, data }) => {
                 if (status === 'success') {
                     this.removeForm()
                     this.updateRow({ formData, data })
                 } else {
-                    notice.find('.error').html(message)
+                    notice.find('.error').html(data)
                     notice.removeClass('hidden').addClass('notice')
                 }
             })
@@ -166,12 +166,12 @@
                     }
                 })
 
-                request.done(({ status, message }) => {
+                request.done(({ status, data }) => {
                     if (status === 'success') {
                         this.removeForm()
                         this.removeRow(id)
                     } else {
-                        notice.find('.error').html(message)
+                        notice.find('.error').html(data)
                         notice.removeClass('hidden').addClass('notice')
                     }
                 })

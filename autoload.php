@@ -17,6 +17,6 @@ return  [
     ],
     'frontend' => [
         'frontend/api',
-        'frontend/endpoint'
+        'frontend/endpoints'
     ]
 ];

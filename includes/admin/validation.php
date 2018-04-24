@@ -16,19 +16,20 @@ trait Validation
      * Validate request, form and data
      *
      * @access private
+     * @param array $check
      * @return mixed $isValid
      */
-    private function validate()
+    private function validate(array $checks)
     {
-        if (! $this->isValidRequest()) {
+        if (in_array('request', $checks) && ! $this->isValidRequest()) {
             return new \WP_Error('invalid-request', __('This doesn\'t seem right.', 'apison'));
         }
 
-        if (! $this->isValidForm()) {
+        if (in_array('form', $checks) && ! $this->isValidForm()) {
             return new \WP_Error('invalid-form', __('Please ensure all required fields are populated correctly.', 'apison'));
         }
 
-        if (! $this->isUnique()) {
+        if (in_array('unique', $checks) && ! $this->isUnique()) {
             return new \WP_Error('invalid-slug', __('Please ensure the slug is unique.', 'apison'));
         }
 
@@ -44,7 +45,7 @@ trait Validation
     private function isValidRequest() : bool
     {
         $validNonce = check_ajax_referer(APISON_KEY . '_nonce', 'nonce', false);
-        $validAction = $_REQUEST['action'] === APISON_KEY . '_save' || $_REQUEST['action'] === APISON_KEY . '_delete';
+        $validAction = $this->request['action'] === APISON_KEY . '_save' || $this->request['action'] === APISON_KEY . '_delete';
 
         return $validNonce && $validAction;
     }
@@ -68,9 +69,7 @@ trait Validation
      */
     private function isUnique() : bool
     {
-        if ($this->form->id === $this->form->slug) {
-            return true;
-        }
+        if ($this->form->id === $this->form->slug) return true;
 
         $slugs = array_map(function ($endpoint) {
             return $endpoint->slug;
@@ -83,15 +82,19 @@ trait Validation
      * Sanitize form data
      *
      * @access private
-     * @param array $fields
-     * @return object $form
+     * @param string|array $fields
+     * @return mixed $form
      */
-    private function sanitizeForm(array $fields) : \stdClass
+    private function sanitizeForm($fields)
     {
+        if (is_string($fields)) {
+            return sanitize_text_field($fields);
+        }
+
         return (object) [
             'id' => sanitize_text_field($fields['id']),
             'title' => sanitize_text_field($fields['title']),
-            'slug' => sanitize_key($fields['slug']),
+            'slug' => str_replace('-', '', sanitize_key($fields['slug'])),
             'url' => esc_url($fields['url']),
             'path' => sanitize_text_field($fields['path']),
             'cache' => sanitize_text_field($fields['cache']),

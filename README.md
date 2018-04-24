@@ -2,7 +2,7 @@
 
 Apison is little WordPress plugin to fetch, cache and access API data (JSON).
 
-Simply add your api endpoints (with token if applicable) in the WordPress admin (under Settings -> Apison), then you can access the cached API data via the helper class or rest endpoints.
+Simply add your api endpoints (with token if applicable) in the WordPress admin (under Settings->Apison), then you can access the cached API data via the helper class or rest endpoints.
 
 ## Admin interface
 ![screenshot](screenshot.png)
@@ -61,4 +61,6 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 ### Notes
 The accepted where/and clause opterators are: `is`, `not`, `gt` (greater than), `lt` (less than), `gte` (greater than or equal to) and `lte` (less than or equal to).
 
-Also, this plugin requires WordPress `4.8.0+` and PHP `7.1.0+`
+Any cached anypoint can be forcibly refreshed by hitting endpoint/refresh i.e. `/wp-json/apison/jobs/refresh` or `/wp-json/apison/forcast/refresh`.
+
+This plugin requires WordPress `4.8.0+` and PHP `7.1.0+`.

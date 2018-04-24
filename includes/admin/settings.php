@@ -18,7 +18,7 @@ class Settings
     const SCREEN = 'settings_page_' . APISON_KEY;
 
     private $form = [];
-    private $request = null;
+    private $request = [];
     private $endpoints = [];
 
     /**
@@ -115,28 +115,17 @@ class Settings
      */
     public function save()
     {
-        $this->endpoints = Option::get();
-        $this->form = $this->sanitizeForm($_REQUEST['fields']);
+        $this->setProperties('fields');
 
-        $validation = $this->validate();
+        $validation = $this->validate(['request', 'form', 'unique']);
 
         if (is_wp_error($validation)) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => $validation->get_error_message()
-            ]);
-
-            die();
+            $this->respondWith('error', $validation->get_error_message());
         }
 
         $this->saveEndpoint();
 
-        echo json_encode([
-            'status' => 'success',
-            'data' => $this->getRow()
-        ]);
-
-        die();
+        $this->respondWith('success', $this->getRow());
     }
 
     /**
@@ -147,22 +136,46 @@ class Settings
      */
     public function delete()
     {
-        $this->endpoints = Option::get();
-        $this->form = sanitize_text_field($_REQUEST['id']);
+        $this->setProperties('id');
 
-        if (! $this->isValidRequest()) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => __('Invalid request', 'apison')
-            ]);
+        $validation = $this->validate(['request']);
 
-            die();
+        if (is_wp_error($validation)) {
+            $this->respondWith('error', $validation->get_error_message());
         }
 
         $this->deleteEndpoint();
 
+        $this->respondWith('success');
+    }
+
+    /**
+     * Set the needed class properties
+     *
+     * @access private
+     * @param string $key
+     * @return void
+     */
+    private function setProperties(string $key) : void
+    {
+        $this->request = $_REQUEST;
+        $this->endpoints = Option::get();
+        $this->form = $this->sanitizeForm($this->request[$key]);
+    }
+
+    /**
+     * Return status and message
+     *
+     * @access private
+     * @param string $status
+     * @param mixed $data
+     * @return array $response
+     */
+    private function respondWith(string $status, $data = '')
+    {
         echo json_encode([
-            'status' => 'success'
+            'status' => $status,
+            'data' => $data
         ]);
 
         die();

@@ -7,6 +7,8 @@
 
 namespace Lambry\Apison\Frontend;
 
+use Lambry\Apison\Shared\Transient;
+
 defined('ABSPATH') || exit;
 
 class Endpoint
@@ -14,16 +16,31 @@ class Endpoint
     const RESERVED = ['slug', 'with', 'limit'];
 
     /**
-     * Register the endpoint
+     * Register endpoints
      *
      * @access public
      * @return void
      */
     public function init() : void
     {
-        register_rest_route(APISON_KEY, '/(?P<slug>\w+)', [
-            'methods' => 'GET',
-            'callback' => [$this, 'get']
+        $this->register('/(?P<slug>\w+)', 'GET', 'get');
+        $this->register('/(?P<slug>\w+)/refresh', 'GET', 'refresh');
+    }
+
+    /**
+     * Register rest route
+     *
+     * @access public
+     * @param string $path
+     * @param string|array $methods
+     * @param string $method
+     * @return void
+     */
+    public function register(string $path, string $methods, string $method) : void
+    {
+        register_rest_route(APISON_KEY, $path, [
+            'methods' => $methods,
+            'callback' => [$this, $method]
         ]);
     }
 
@@ -37,6 +54,20 @@ class Endpoint
     public function get(\WP_REST_Request $request)
     {
         $data = $this->getData($request->get_params());
+
+        return rest_ensure_response($data);
+    }
+
+    /**
+     * Refresh an endpoints data
+     *
+     * @access public
+     * @param object $request
+     * @return mixed
+     */
+    public function refresh(\WP_REST_Request $request)
+    {
+        $data = (new Transient($request->get_param('slug')))->set();
 
         return rest_ensure_response($data);
     }
