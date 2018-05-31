@@ -24,7 +24,7 @@ class Endpoint
     public function init() : void
     {
         $this->register('/(?P<slug>\w+)', 'GET', 'get');
-        $this->register('/(?P<slug>\w+)/refresh', 'GET', 'refresh');
+        $this->register('/refresh/(?P<slug>\w+)', 'GET', 'refresh');
     }
 
     /**

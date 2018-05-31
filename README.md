@@ -33,23 +33,23 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 ```
 
 ## Fetching cached API data via rest endpoints
-```
-#Get all jobs
+```html
+<!-- Get all jobs -->
 /wp-json/apison/jobs
 
-#Get full forcast with just humidity and temperature fields
+<!-- Get full forcast with just humidity and temperature fields -->
 /wp-json/apison/forcast?with=humidity,temperature
 
-#Get all contacts with a role of either sales or marketing
+<!-- Get all contacts with a role of either sales or marketing -->
 /wp-json/apison/contacts?role=sales,marketing
 
-#Get 10 listings that have a price greater than 100
+<!-- Get 10 listings that have a price greater than 100 -->
 /wp-json/apison/listings?price.gt=100&limit=10
 
-#Get 20 events offset by 20 that are not in the sports category
+<!-- Get 20 events offset by 20 that are not in the sports category -->
 /wp-json/apison/events?category.not=sports&limit=20,20
 
-#Get the title and price for all products that are currently on sale and are priced under 50
+<!-- Get the title and price for all products that are currently on sale and are priced under 50 -->
 /wp-json/apison/products?sale=true&price.lt=50&with=title,price
 ```
 
@@ -61,6 +61,6 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 ### Notes
 The accepted where/and clause opterators are: `is`, `not`, `gt` (greater than), `lt` (less than), `gte` (greater than or equal to) and `lte` (less than or equal to).
 
-Any cached anypoint can be forcibly refreshed by hitting endpoint/refresh i.e. `/wp-json/apison/jobs/refresh` or `/wp-json/apison/forcast/refresh`.
+Any cached anypoint can be forcibly refreshed by hitting refresh/endpoint i.e. `/wp-json/apison/refresh/jobs` or `/wp-json/apison/refresh/forcast`.
 
 This plugin requires WordPress `4.8.0+` and PHP `7.1.0+`.
