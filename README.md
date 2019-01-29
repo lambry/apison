@@ -22,11 +22,11 @@ Api::get('forcast')->with(['humidity', 'temperature'])->all();
 // Get all contacts with a role of either sales or marketing
 Api::get('contacts')->where('role', ['sales', 'marketing'])->all();
 
-// Get 10 listings that have a price greater than 100
-Api::get('listings')->where('price', 'gt', 100)->limit(10);
+// Get the last 10 listings that have a price greater than 100
+Api::get('listings')->where('price', 'gt', 100)->last(10);
 
-// Get 20 events offset by 20 that are not in the sports category
-Api::get('events')->where('category', 'not', 'sports')->limit(20, 20);
+// Get the first 20 events offset by 20 that are not in the sports category
+Api::get('events')->where('category', 'not', 'sports')->first(20, 20);
 
 // Get the title and price for all products that are currently on sale and are priced under 50
 Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title', 'price'])->all();
@@ -43,11 +43,11 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 <!-- Get all contacts with a role of either sales or marketing -->
 /wp-json/apison/contacts?role=sales,marketing
 
-<!-- Get 10 listings that have a price greater than 100 -->
-/wp-json/apison/listings?price.gt=100&limit=10
+<!-- Get the last 10 listings that have a price greater than 100 -->
+/wp-json/apison/listings?price.gt=100&last=10
 
-<!-- Get 20 events offset by 20 that are not in the sports category -->
-/wp-json/apison/events?category.not=sports&limit=20,20
+<!-- Get the first 20 events offset by 20 that are not in the sports category -->
+/wp-json/apison/events?category.not=sports&first=20,20
 
 <!-- Get the title and price for all products that are currently on sale and are priced under 50 -->
 /wp-json/apison/products?sale=true&price.lt=50&with=title,price

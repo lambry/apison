@@ -13,7 +13,7 @@ defined('ABSPATH') || exit;
 
 class Endpoint
 {
-    const RESERVED = ['slug', 'with', 'limit'];
+    const RESERVED = ['slug', 'with', 'first', 'last'];
 
     /**
      * Register endpoints
@@ -95,12 +95,20 @@ class Endpoint
             $api->with(explode(',', $params['with']));
         }
 
-        return isset($params['limit']) ? $api->limit(...explode(',', $params['limit'])) : $api->all();
+        if (isset($params['first'])) {
+            return $api->first(...explode(',', $params['first']));
+        }
+
+        if (isset($params['last'])) {
+            return $api->last(...explode(',', $params['last']));
+        }
+
+        return $api->all();
     }
 
     /**
      * Check and set the query key, comparator and value
-     * NOTE: . in param is converted to _ by WordPress
+     * NOTE: in param is converted to _ by WordPress
      *
      * @access private
      * @param string $param

@@ -103,7 +103,7 @@ class Api
     }
 
     /**
-     * Set the limit and optional offset, this only works on arrays
+     * Return the first x items from an array with optional offset
      *
      * @access public
      * @param int $limit
@@ -111,13 +111,23 @@ class Api
      * @return mixed $data
      *
      */
-    public function limit(int $limit = 10, int $offset = 0)
+    public function first(int $limit = 10, int $offset = 0)
     {
-        if (! is_array($this->data)) {
-            return $this->data;
-        }
+        return is_array($this->data) ? array_slice($this->data, $offset, $limit) : $this->data;
+    }
 
-        return array_slice($this->data, $offset, $limit);
+    /**
+     * Return the last x items from an array with optional offset
+     *
+     * @access public
+     * @param int $limit
+     * @param int $offset
+     * @return mixed $data
+     *
+     */
+    public function last(int $limit = 10, int $offset = 0)
+    {
+        return is_array($this->data) ? array_slice($this->data, -($offset + $limit), $limit) : $this->data;
     }
 
     /**
