@@ -2,14 +2,17 @@
  * Apsion styles
  */
 
- $white: #fff;
- $silver: #f9f9f9;
- $red: #e40404;
- $green: #01c501;
+$white: #fff;
+$silver: #f9f9f9;
+$red: #e40404;
+$green: #01c501;
 
 .apison {
     .tablenav {
         height: 0;
+    }
+    &-edit {
+        margin-right: 1rem;
     }
     &-error {
         color: $red;

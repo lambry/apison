@@ -3,7 +3,7 @@
  * Plugin Name: Apison
  * Plugin URI: https://github.com/lambry/apison/
  * Description: A little plugin to fetch, cache and access API data (JSON).
- * Version: 0.2.0
+ * Version: 0.2.1
  * Author: Lambry
  * Author URI: https://lambry.com/
  * License: GPL-2.0+
@@ -18,7 +18,7 @@ defined('ABSPATH') || exit;
 
 require_once 'includes/helpers.php';
 
-define('APISON_VERSION', '0.2.0');
+define('APISON_VERSION', '0.2.1');
 define('APISON_KEY', 'apison');
 define('APISON_URL', plugin_dir_url(__FILE__) . 'includes/');
 define('APISON_PATH', plugin_dir_path(__FILE__) . 'includes/');

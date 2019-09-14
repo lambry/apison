@@ -61,7 +61,7 @@ class Settings
      */
     public function menu() : void
     {
-        $page = add_options_page(__('Apison APIs', 'apsion'), __('Apison', 'apison'), apply_filters('apison/permission', 'manage_options'), APISON_KEY, [$this, 'page']);
+        $page = add_options_page(__('Apison Endpoints', 'apsion'), __('Apison', 'apison'), apply_filters('apison/permission', 'manage_options'), APISON_KEY, [$this, 'page']);
 
         add_action('load-' . $page, [$this, 'help']);
     }

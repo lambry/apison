@@ -1,0 +1,20 @@
+{
+    "name": "lambry/apison",
+    "description": "WordPress plugin to fetch, cache and access API data.",
+    "homepage": "https://github.com/lambry/apison",
+    "license": "GPL-2.0-or-later",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "David Featherston",
+            "homepage": "https://lambry.com"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "plugin"
+    ],
+    "require": {
+        "php": ">7.1.0"
+    }
+}

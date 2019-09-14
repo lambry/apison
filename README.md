@@ -4,7 +4,12 @@ Apison is little WordPress plugin to fetch, cache and access API data (JSON).
 
 Simply add your api endpoints (with token if applicable) in the WordPress admin (under Settings->Apison), then you can access the cached API data via the helper class or rest endpoints.
 
+## Installing
+
+Either run `composer require lambry/apison` or just download this repo and install it via the WordPress admin.
+
 ## Admin interface
+
 ![screenshot](screenshot.png)
 
 ## Fetching cached API data via PHP
@@ -33,6 +38,7 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 ```
 
 ## Fetching cached API data via rest endpoints
+
 ```html
 <!-- Get all jobs -->
 /wp-json/apison/jobs
@@ -54,11 +60,41 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 ```
 
 ### Filters
+
+`apison/key`: allows you to supply an api key, just use `_key_` as a placeholder when adding a new url.
+
 `apison/cache`: filters the avaible options in the admin cache select box, i.e. 15mins, 1hr etc.
 
 `apison/permission`: sets which permission to use when registering the admin menu.
 
+```php
+// Setting api keys
+add_filter('apison/key', function($slug) {
+    switch ($slug) {
+        case 'events':
+            return env('EVENTS_API_KEY');
+            break;
+        case 'weather':
+            return env('WEATHER_API_KEY');
+            break;
+    }
+});
+
+// Adding new cache durations
+add_filter('apison/cache', function($options) {
+    $options['10080'] = '1 week';
+
+    return $options;
+});
+
+// Altering permissions to see the plugin admin
+add_filter('apison/permission', function() {
+    return 'manage_network';
+});
+```
+
 ### Notes
+
 The accepted where/and clause opterators are: `is`, `not`, `gt` (greater than), `lt` (less than), `gte` (greater than or equal to) and `lte` (less than or equal to).
 
 Any cached anypoint can be forcibly refreshed by hitting refresh/endpoint i.e. `/wp-json/apison/refresh/jobs` or `/wp-json/apison/refresh/forcast`.

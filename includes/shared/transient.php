@@ -46,7 +46,7 @@ class Transient
      */
     public function set()
     {
-        $request = wp_remote_get($this->endpoint->url);
+        $request = wp_remote_get($this->getUrl());
         $code = wp_remote_retrieve_response_code($request);
 
         if (! is_wp_error($request) && $code === 200) {
@@ -87,6 +87,21 @@ class Transient
         $expiration = $time = get_option('_transient_timeout_' . APISON_KEY . "_{$slug}");
 
         return (! empty($expiration) && $expiration > $now) ? human_time_diff($now, $expiration) : __('Empty', 'apison');
+    }
+
+    /**
+     * Get a parsed url with optional {key}
+     *
+     * @access private
+     * @return string $url
+     */
+    private function getUrl() : string
+    {
+        if (strpos($this->endpoint->url, '_key_')) {
+            return str_replace('_key_', apply_filters("apison/key", $this->endpoint->slug) ?: '', $this->endpoint->url);
+        }
+
+        return $this->endpoint->url;
     }
 
     /**

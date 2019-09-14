@@ -68,7 +68,7 @@ class Table extends \WP_List_Table
         $title = '<strong>' . $item->title . '</strong>';
 
         $actions = [
-            'edit' => sprintf('<a href="#" class="apison-edit">%s</a>', __('Edit', 'apison'))
+            'edit' => sprintf('<a href="#" class="apison-edit">%s</a><a href="%s" class="apison-view" target="_blank">%s</a>', __('Edit', 'apison'), rest_url(APISON_KEY . "/$item->slug"),  __('View', 'apison'))
         ];
 
         return $title . $this->hidden_fields($item) . $this->row_actions($actions);
