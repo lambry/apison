@@ -68,6 +68,7 @@ Api::get('products')->where('sale', true)->and('price', 'lt', 50)->with(['title'
 `apison/permission`: sets which permission to use when registering the admin menu.
 
 ```php
+<?php
 // Setting api keys
 add_filter('apison/key', function($slug) {
     switch ($slug) {

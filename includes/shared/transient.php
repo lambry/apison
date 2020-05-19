@@ -98,7 +98,7 @@ class Transient
     private function getUrl() : string
     {
         if (strpos($this->endpoint->url, '_key_')) {
-            return str_replace('_key_', apply_filters("apison/key", $this->endpoint->slug) ?: '', $this->endpoint->url);
+            return str_replace('_key_', apply_filters('apison/key', $this->endpoint->slug) ?: '', $this->endpoint->url);
         }
 
         return $this->endpoint->url;
